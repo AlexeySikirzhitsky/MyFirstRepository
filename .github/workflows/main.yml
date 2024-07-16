@@ -44,7 +44,7 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: List Azure Web Apps
-      run: az webapp list --query "[].{name:name, resourceGroup:resourceGroup}" --output table
+      run: az webapp list --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }} --resource-group AlexResourceGroup --query "[].{name:name, resourceGroup:resourceGroup}" --output table
 
     - name: Get Secret from Key Vault
       id: get-secret

@@ -51,8 +51,8 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: GitHub Actions Deployment
-        slot-name: Staging
+        app-name: lib-web-app
+        slot-name: staging
         package: ./publish
       env:
         ConnectionStrings__DefaultConnection: ${{ env.DB_CONNECTION_STRING }}

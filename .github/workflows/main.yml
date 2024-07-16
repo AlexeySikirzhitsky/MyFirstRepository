@@ -43,6 +43,9 @@ jobs:
         client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+    - name: List Azure Web Apps
+      run: az webapp list --query "[].{name:name, resourceGroup:resourceGroup}" --output table
+
     - name: Get Secret from Key Vault
       id: get-secret
       run: |

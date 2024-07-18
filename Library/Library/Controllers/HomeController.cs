@@ -4,6 +4,7 @@ namespace Library.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         [Route("Home/Error")]
         public IActionResult Error()
         {

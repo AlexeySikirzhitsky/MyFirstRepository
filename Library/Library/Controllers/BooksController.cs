@@ -4,21 +4,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class BooksController : Controller
     {
         private readonly IBookService _bookService;
-        public BooksController(IBookService bookService)
+        private readonly ILogger<BooksController> _logger;
+        public BooksController(IBookService bookService, ILogger<BooksController> logger)
         {
             _bookService = bookService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
-            var books = await _bookService.GetBooksAsync();
-            return Ok(books);
+            try
+            {
+                var books = await _bookService.GetBooksAsync();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting books.");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpGet("{id}")]

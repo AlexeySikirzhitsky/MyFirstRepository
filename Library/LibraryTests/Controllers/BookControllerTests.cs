@@ -4,6 +4,7 @@ using Library.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryTests.Controllers
 {
@@ -11,13 +12,15 @@ namespace LibraryTests.Controllers
     public class BookControllerTests
     {
         private Mock<IBookService> _bookService;
+        private Mock<ILogger<BooksController>> _logger;
         private BooksController _controller;
 
         [SetUp]
         public void Setup()
         {
             _bookService = new Mock<IBookService>();
-            _controller = new BooksController(_bookService.Object);
+            _logger = new Mock<ILogger<BooksController>>();
+            _controller = new BooksController(_bookService.Object, _logger.Object);
         }
 
         [Test]

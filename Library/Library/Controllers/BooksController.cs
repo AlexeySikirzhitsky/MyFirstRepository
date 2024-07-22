@@ -21,7 +21,8 @@ namespace Library.Controllers
         {
             try
             {
-                var books = await _bookService.GetBooksAsync();
+                //var books = await _bookService.GetBooksAsync();
+                var books = new List<Book> { { new() { Id = 1, Description = "2", Title = "3" } } };
                 return Ok(books);
             }
             catch (Exception ex)

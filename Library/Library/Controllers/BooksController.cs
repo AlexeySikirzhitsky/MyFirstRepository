@@ -21,17 +21,13 @@ namespace Library.Controllers
         {
             try
             {
-                //var books = await _bookService.GetBooksAsync();
-                var books = new List<Book>
-                {
-                    new() { Id = 1, Description = "1", Title = "1" }
-                };
+                var books = await _bookService.GetBooksAsync();
                 return Ok(books);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while getting books.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ex.InnerException);
             }
         }
 

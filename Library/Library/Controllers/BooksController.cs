@@ -27,7 +27,7 @@ namespace Library.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while getting books.");
-                return StatusCode(500, ex.InnerException);
+                return StatusCode(500, new { ErrorMessage = ex.Message, StackTrace = ex.ToString() });
             }
         }
 
